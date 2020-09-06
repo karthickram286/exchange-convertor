@@ -1,0 +1,54 @@
+{
+  "service": {
+    "env": "dev",
+    "port": {
+      "dev": 5000,
+      "test": 6000,
+      "prod": 7000
+    },
+    "rateLimit": {
+      "maxRequests": 30,
+      "expireInSeconds": 60
+    },
+    "country": {
+      "endpoint": "http://restcountries.eu/rest/v2/name/"
+    }
+  },
+  "database": {
+    "dev": {
+      "username": "postgres",
+      "password": null,
+      "dbname": "exchange_converter",
+      "host": "127.0.0.1",
+      "dialect": "postgres"
+    },
+    "test": {
+      "username": "postgres",
+      "password": null,
+      "dbname": "exchange_converter_test",
+      "host": "127.0.0.1",
+      "dialect": "postgres"
+    },
+    "prod": {
+      "username": "postgres",
+      "password": null,
+      "dbname": "exchange_converter",
+      "host": "127.0.0.1",
+      "dialect": "postgres"
+    }
+  },
+  "redis": {
+    "dev": {
+      "host": "127.0.0.1",
+      "port": 6379
+    },
+    "test": {
+      "host": "127.0.0.1",
+      "port": 6379
+    },
+    "prod": {
+      "host": "127.0.0.1",
+      "port": 6379
+    }
+  }
+}
