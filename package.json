@@ -1,0 +1,19 @@
+{
+  "name": "exchange-convertor",
+  "version": "1.0.0",
+  "description": "Currency exchange convertor application",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/karthickram286/exchange-convertor.git"
+  },
+  "author": "Karthick Ram",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/karthickram286/exchange-convertor/issues"
+  },
+  "homepage": "https://github.com/karthickram286/exchange-convertor#readme"
+}
