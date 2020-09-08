@@ -10,7 +10,6 @@ const rateLimiter: RequestHandler = async (req, res, next) => {
 
   let count = parseInt(await getKey(token));
 
-      // "expireInSeconds": 60
   let maxRequests = _.get(config, 'service.rateLimit.maxRequests');
   if (count > maxRequests) {
     return res.status(429)
@@ -18,7 +17,8 @@ const rateLimiter: RequestHandler = async (req, res, next) => {
   }
 
   if (!count) {
-    await setKeyWithTTL(token, "1");
+    let expireTime = _.get(config, 'service.rateLimit.expireInSeconds');
+    await setKeyWithTTL(token, "1", expireTime);
   } else {
     await incrCount(token);
   }

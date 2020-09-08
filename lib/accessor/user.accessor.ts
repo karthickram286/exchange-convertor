@@ -1,9 +1,14 @@
+import _ from 'lodash';
+
 import UserModel from '../model/user.model';
+import { getFromCache } from '../manager/cache.manager';
+import { Constants } from '../constants/constant';
 
 class UserAccessor {
 
   /**
    * Creates User model
+   * 
    * @param user 
    */
   static createUser = async (user: any) => {
@@ -29,13 +34,22 @@ class UserAccessor {
    * @param username 
    */
   static getUser = async (username: string) => {
-    let user = await UserModel.findOne({
-      where: {
-        username: username
-      }
+    let cacheKey = `${Constants.UserNamePrefix}_${username}`;
+    let result = getFromCache(cacheKey, async () => {
+      return await UserModel.findOne({
+        where: {
+          username: username
+        }
+      });
     });
 
-    return user;
+    // let user = await UserModel.findOne({
+    //   where: {
+    //     username: username
+    //   }
+    // });
+
+    return result;
   };
 
   /**

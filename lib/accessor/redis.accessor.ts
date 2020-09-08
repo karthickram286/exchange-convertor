@@ -1,20 +1,27 @@
 import { redisClient } from '../connection/redis.connection';
 
 import { promisify } from 'util';
+import _ from 'lodash';
 
+let incrAsync: any = null;
+let getAsync: any = null;
 
 const incrCount = async (key: string) => {
-  const incrAsync = promisify(redisClient.incr).bind(redisClient);
+  if (incrAsync == null) {
+    incrAsync = promisify(redisClient.incr).bind(redisClient);
+  }
   await incrAsync(key);
 };
 
 const getKey = async (key: string) => {
-  const getAsync = promisify(redisClient.get).bind(redisClient);
+  if (getAsync == null) {
+    getAsync = promisify(redisClient.get).bind(redisClient);
+  }
   return await getAsync(key);
 };
 
-const setKeyWithTTL = async (key: string, val: string) => {
-  await redisClient.setex(key, 60, val);
+const setKeyWithTTL = async (key: string, val: string, expireTime: number) => {
+  await redisClient.setex(key, expireTime, val);
 };
 
 export {

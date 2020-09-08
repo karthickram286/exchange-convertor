@@ -7,8 +7,11 @@
       "prod": 7000
     },
     "rateLimit": {
-      "maxRequests": 30,
+      "maxRequests": 3,
       "expireInSeconds": 60
+    },
+    "cache": {
+      "expireInSeconds": 600
     },
     "country": {
       "endpoint": "http://restcountries.eu/rest/v2/name/"
