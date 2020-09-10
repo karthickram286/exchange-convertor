@@ -7,6 +7,7 @@ import { connectRedis } from './lib/connection/redis.connection';
 import UserRouter from './lib/routes/user.routes';
 import AuthRouter from './lib/routes/auth.routes';
 import CountryRouter from './lib/routes/country.routes';
+import ConvertorRouter from './lib/routes/convertor.routes';
 import { authorize } from './lib/middleware/authorize.middleware';
 import { rateLimiter } from './lib/middleware/rateLimiter.middleware';
 
@@ -38,6 +39,7 @@ connectRedis();
 app.use('/v1/users', UserRouter);
 app.use('/v1/auth', AuthRouter);
 app.use('/v1/country', authorize, rateLimiter, CountryRouter);
+app.use('/v1/convert', authorize, rateLimiter, ConvertorRouter);
 
 /**
  * Starting the server
@@ -66,8 +68,8 @@ process.on('uncaughtException', error => {
 /**
  * Handling Unhandled Rejection
  */
-process.on('unhandledRejection', (reason) => {
-  throw reason;
+process.on('unhandledRejection', (error) => {
+  throw error;
 });
 
 export {

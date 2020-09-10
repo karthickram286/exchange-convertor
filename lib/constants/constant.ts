@@ -1,6 +1,7 @@
 const Constants = {
-  'UserNamePrefix': 'UserName',
-  'UserIdPrefix': 'UserId'
+  UserNamePrefix: 'UserName',
+  UserIdPrefix: 'UserId',
+  CountryPrefix: 'Country'
 }
 
 export {

@@ -4,6 +4,8 @@ import { RequestHandler } from 'express';
 
 import * as config from '../config/config.json';
 import { pickCountryField } from '../helper/country.helper';
+import { getCountryCacheKey } from '../util/cacheKey';
+import { getFromCache } from '../manager/cache.manager';
 
 class CountryController {
 
@@ -11,10 +13,17 @@ class CountryController {
 
     let countryName = req.params.name;
 
-    let url: string = _.get(config, 'service.country.endpoint') + countryName;
+    let base_url = _.get(config, 'service.country.base_url')
+    let endpoint = _.get(config, 'service.country.endpoint');
+    let url: string = `${base_url}${endpoint}${countryName}`;
 
-    const response = await axios.get(url);
-    const countriesArray: Array<object> = response.data;
+    const cacheKey = getCountryCacheKey(countryName);
+    let result = await getFromCache(cacheKey, async () => {
+      let response = await axios.get(url);
+      return response.data;
+    });
+
+    const countriesArray: Array<object> = result;
 
     let pickedCountries = pickCountryField(countriesArray);
 

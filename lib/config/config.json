@@ -7,14 +7,21 @@
       "prod": 7000
     },
     "rateLimit": {
-      "maxRequests": 3,
+      "maxRequests": 30,
       "expireInSeconds": 60
     },
     "cache": {
       "expireInSeconds": 600
     },
     "country": {
-      "endpoint": "http://restcountries.eu/rest/v2/name/"
+      "base_url": "http://restcountries.eu",
+      "endpoint": "/rest/v2/name/"
+    },
+    "convertor": {
+      "base_url": "http://data.fixer.io/api/latest",
+      "access_key_param": "?access_key=",
+      "access_key": "045b39e808c26d3a6ed19e3de99bec08",
+      "convertor_param": "&symbols=" 
     }
   },
   "database": {

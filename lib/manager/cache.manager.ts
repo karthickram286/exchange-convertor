@@ -10,13 +10,13 @@ const _getValueFromCache = async (key: string) => {
     let val = await getKey(key);
 
     if (!_.isUndefined(val) && !_.isEmpty(val)) {
-      console.log(`Cache hit`);
+      console.log(`Cache hit. Key: ${key}`);
       return JSON.parse(val);
     }
-    console.log(`Cache miss`);
+    console.log(`Cache miss. Key: ${key}`);
     return null;
   } catch (error) {
-    console.log(`Cache miss, Error: ${error}`);
+    console.log(`Cache miss. Key: ${key}, Error: ${error}`);
     return null;
   }
 };
@@ -32,14 +32,14 @@ const _putValueToCache = async (key: string, val: string) => {
   }
 };
 
-const getFromCache = async (key: string, callback: CallBackFunc) => {
-  let cacheVal = await _getValueFromCache(key);
+const getFromCache = async (cacheKey: string, callback: CallBackFunc) => {
+  let cacheVal = await _getValueFromCache(cacheKey);
   if (cacheVal != null) {
     return cacheVal;
   } else {
-    let dbValue = await callback();
-    await _putValueToCache(key, JSON.stringify(dbValue));
-    return dbValue;
+    let originalValue = await callback();
+    await _putValueToCache(cacheKey, JSON.stringify(originalValue));
+    return originalValue;
   }
 }
 
