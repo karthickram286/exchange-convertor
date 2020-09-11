@@ -12,8 +12,13 @@ const getCountryCacheKey = (searchKey: string) => {
   return `${Constants.CountryPrefix}_${searchKey}`;
 };
 
+const getConvertorCacheKey = (currencies: string) => {
+  return `${Constants.ConvertorPrefix}_${currencies}`;
+}
+
 export {
   getUserNameCacheKey,
   getUserIdCacheKey,
-  getCountryCacheKey
+  getCountryCacheKey,
+  getConvertorCacheKey
 };
