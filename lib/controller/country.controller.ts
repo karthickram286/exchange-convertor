@@ -3,7 +3,7 @@ import _ from 'lodash';
 import { RequestHandler } from 'express';
 
 import * as config from '../config/config.json';
-import { pickCountryField } from '../helper/country.helper';
+import { pickCountryFields } from '../helper/country.helper';
 import { getCountryCacheKey } from '../util/cacheKey';
 import { getFromCache } from '../manager/cache.manager';
 
@@ -25,7 +25,7 @@ class CountryController {
 
     const countriesArray: Array<object> = result;
 
-    let pickedCountries = pickCountryField(countriesArray);
+    let pickedCountries = pickCountryFields(countriesArray);
 
     return res.status(200)
       .json(pickedCountries);

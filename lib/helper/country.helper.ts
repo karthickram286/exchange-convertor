@@ -12,11 +12,13 @@ interface countryInterface {
 }
 
 /**
- * @desc Picks only the needed fields from countries array
+ * @desc Picks only the needed fields from countries array.
  * 
- * @param countriesArray 
+ * @param countriesArray - Returned from the external api
+ * 
+ * @returns pickedCountries
  */
-const pickCountryField = (countriesArray: Array<object>) => {
+const pickCountryFields = (countriesArray: Array<object>) => {
 
   let pickedCountries = _.map(countriesArray, (country: countryInterface) => {
     let name = country.name;
@@ -36,5 +38,5 @@ const pickCountryField = (countriesArray: Array<object>) => {
 }
 
 export { 
-  pickCountryField
+  pickCountryFields
 };

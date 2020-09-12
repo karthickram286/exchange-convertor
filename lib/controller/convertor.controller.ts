@@ -33,7 +33,6 @@ class ConvertorController {
     delete rates[base_currency];
 
     let conversionAmount = getConversion(base_currency_rate, rates, amount);
-    console.log(conversionAmount);
 
     return res.status(200)
       .json(conversionAmount);

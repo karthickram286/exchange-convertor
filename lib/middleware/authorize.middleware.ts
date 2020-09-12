@@ -13,10 +13,10 @@ const authorize: RequestHandler = async (req, res, next) => {
       .json({ message: `Auth token not provided` });
   }
 
-  if(!_verifyToken(token)) {
+  let errorMessage = await _verifyToken(token);
+  if (errorMessage !== true)
     return res.status(401)
-      .json({ message: `Invalid Token`});
-  }
+      .json({ message: errorMessage}); 
 
   next();
 };
@@ -27,14 +27,19 @@ const authorize: RequestHandler = async (req, res, next) => {
  */
 const _verifyToken = async (token: string) => {
 
-  const decoded = jwt.verify(token, jwtPrivatekey);
-  let decodedId = _.get(decoded, 'id');
+  try {
+    const decoded = jwt.verify(token, jwtPrivatekey);
+    let decodedId = _.get(decoded, 'id');
 
-  let isUserExists = await _isUserExist(decodedId);
-  if (!isUserExists) {
-    return false;
+    let isUserExists = await _isUserExist(decodedId);
+    if (!isUserExists) {
+      return false;
+    }
+    return true;
+  } catch (error) {
+    console.log(error);
+    return error.message;
   }
-  return true;
 };
 
 /**
