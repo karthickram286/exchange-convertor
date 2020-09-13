@@ -1,0 +1,20 @@
+.navbar-header {
+  background-color: #282c34;
+  display: flex;
+  flex-direction: row-reverse;
+  font-size: calc(1px + 2vmin);
+  color: white;
+}
+
+.topnav {
+  overflow: hidden;
+  background-color: #282c34;
+  color: white;
+}
+
+.footer {
+  margin-top: 850px;
+  overflow: hidden;
+  background-color: #282c34;
+  color: white;
+}

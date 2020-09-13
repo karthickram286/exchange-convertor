@@ -26,7 +26,10 @@ class UserController {
     let userObj = await this._createUserObject(username, password);
     await UserAccessor.addUser(userObj);
     return res.status(200)
-      .json(userObj);
+      .json({
+        message: `User created`,
+        id: _.get(userObj, 'id')
+      });
   }
 
   /**
