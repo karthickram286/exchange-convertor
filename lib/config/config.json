@@ -1,6 +1,5 @@
 {
   "service": {
-    "env": "dev",
     "port": {
       "dev": 5000,
       "test": 6000,

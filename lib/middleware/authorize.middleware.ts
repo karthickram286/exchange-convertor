@@ -33,7 +33,7 @@ const _verifyToken = async (token: string) => {
 
     let isUserExists = await _isUserExist(decodedId);
     if (!isUserExists) {
-      return false;
+      return `Invalid user`;
     }
     return true;
   } catch (error) {

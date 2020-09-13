@@ -19,8 +19,16 @@ class CountryController {
 
     const cacheKey = getCountryCacheKey(countryName);
     let result = await getFromCache(cacheKey, async () => {
-      let response = await axios.get(url);
-      return response.data;
+      let response;
+      try {
+        response = await axios.get(url);
+        console.log('found')
+        return response.data;
+      } catch (error) {
+        console.log('found---')
+        console.log('No such country found');
+        return null;
+      }
     });
 
     const countriesArray: Array<object> = result;

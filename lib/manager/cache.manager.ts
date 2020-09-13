@@ -97,12 +97,12 @@ const _putValueToCache = async (key: string, val: string) => {
  */
 const getFromCache = async (cacheKey: string, callback: CallBackFunc) => {
   let cacheVal = await _getValueFromCache(cacheKey);
-  console.log(cacheVal);
   if (cacheVal != null) {
     return cacheVal;
   } else {
     let originalValue = await callback();
-    await _putValueToCache(cacheKey, _getFinalValueToInsert(originalValue));
+    if (originalValue != null && !_.isEmpty(originalValue) && !_.isUndefined(originalValue))
+      await _putValueToCache(cacheKey, JSON.stringify(originalValue));
     return originalValue;
   }
 }

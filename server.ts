@@ -12,7 +12,7 @@ import { authorize } from './lib/middleware/authorize.middleware';
 import { rateLimiter } from './lib/middleware/rateLimiter.middleware';
 
 const app: any = express();
-const env: string = _.get(config, 'service.env');
+const env: any = process.env.NODE_ENV;
 const PORT: any = process.env.PORT || _.get(config, `service.port.${env}`);
 
 app.use(express.json());
@@ -45,7 +45,7 @@ app.use('/v1/convert', authorize, rateLimiter, ConvertorRouter);
  * Starting the server
  */
 let server: any = app.listen(PORT, () => {
-  console.log(`Server started on port ${PORT}`);
+  console.log(`Server started on port ${PORT} for ${env} environment`);
 });
 
 /**
@@ -53,7 +53,7 @@ let server: any = app.listen(PORT, () => {
  */
 process.on('SIGINT', () => {
   console.log(`Terminating the application gracefully`);
-  closeDBConnection()
+  closeDBConnection();
   process.exit(1);
 });
 

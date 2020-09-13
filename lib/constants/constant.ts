@@ -1,6 +1,5 @@
 const Constants = {
-  UserNamePrefix: 'UserName',
-  UserIdPrefix: 'UserId',
+  JWTPrefix: 'JWT',
   CountryPrefix: 'Country',
   ConvertorPrefix: 'Convertor'
 }

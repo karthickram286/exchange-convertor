@@ -8,7 +8,7 @@ import * as redisAccessor from '../../../lib/accessor/redis.accessor';
 describe ('Cache Manager', () => {
 
   before(() => {
-    // console.log = () => {};
+    console.log = () => {};
   });
 
   afterEach(() => {
@@ -25,8 +25,8 @@ describe ('Cache Manager', () => {
     });
 
     it ('should get json value from cache', async () => {
-      sinon.stub(redisAccessor, 'getKey').resolves({ val: 'some val' });
-      let result = await cacheManager._getValueFromCache('key');
+      sinon.stub(redisAccessor, 'getKey').resolves(JSON.stringify({ val: 'some val' }));
+      let result = await cacheManager._getValueFromCache('jsonKey');
       
       expect(result).to.be.deep.equals({ val: 'some val' });
     });
@@ -82,6 +82,17 @@ describe ('Cache Manager', () => {
       });
 
       expect(cbCalled).to.be.true;
+    });
+
+    it ('should return json value on cache miss', async () => {
+      sinon.stub(redisAccessor, 'getKey').resolves(null);
+      sinon.stub(redisAccessor, 'setKeyWithTTL').resolves();
+
+      let result = await cacheManager.getFromCache('cacheKey', () => {
+        return JSON.stringify({ "val": "cached val"});
+      });
+
+      expect(result).to.equals(JSON.stringify({ "val": "cached val"}));
     });
   });
 });

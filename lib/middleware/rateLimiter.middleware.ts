@@ -3,12 +3,14 @@ import _ from 'lodash';
 
 import { incrCount, getKey, setKeyWithTTL } from '../accessor/redis.accessor';
 import * as config from '../config/config.json';
+import { getJWTCacheKey } from '../util/cacheKey';
 
 const rateLimiter: RequestHandler = async (req, res, next) => {
 
   const token: any = req.header('x-auth-token');
+  let key = getJWTCacheKey(token);
 
-  let count = parseInt(await getKey(token));
+  let count = parseInt(await getKey(key));
 
   let maxRequests = _.get(config, 'service.rateLimit.maxRequests');
   if (count > maxRequests) {
@@ -18,9 +20,9 @@ const rateLimiter: RequestHandler = async (req, res, next) => {
 
   if (!count) {
     let expireTime = _.get(config, 'service.rateLimit.expireInSeconds');
-    await setKeyWithTTL(token, "1", expireTime);
+    await setKeyWithTTL(key, "1", expireTime);
   } else {
-    await incrCount(token);
+    await incrCount(key);
   }
   
   next();

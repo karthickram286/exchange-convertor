@@ -20,7 +20,7 @@ class UserController {
     let isUserExist = await this._checkUser(username);
     if (isUserExist) {
       return res.status(409)
-        .json(`User already exists`);
+        .json({ message: `User already exists` });
     }
 
     let userObj = await this._createUserObject(username, password);

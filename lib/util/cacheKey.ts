@@ -5,25 +5,14 @@
 import { Constants } from '../constants/constant';
 
 /**
- * @param username 
- * @returns Username cache key
- */
-const getUserNameCacheKey = (username: string) => {
-  if (username === '') {
-    throw new Error(`username can't be empty`);
-  }
-  return `${Constants.UserNamePrefix}_${username}`;
-};
-
-/**
  * @param userId 
  * @param userId cache key
  */
-const getUserIdCacheKey = (userId: string) => {
-  if (userId === '') {
-    throw new Error(`userId can't be empty`);
+const getJWTCacheKey = (jwt: string) => {
+  if (jwt === '') {
+    throw new Error(`jwt can't be empty`);
   }
-  return `${Constants.UserIdPrefix}_${userId}`;
+  return `${Constants.JWTPrefix}_${jwt}`;
 };
 
 /**
@@ -49,8 +38,7 @@ const getConvertorCacheKey = (currencies: string) => {
 }
 
 export {
-  getUserNameCacheKey,
-  getUserIdCacheKey,
+  getJWTCacheKey,
   getCountryCacheKey,
   getConvertorCacheKey
 };

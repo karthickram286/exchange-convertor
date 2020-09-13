@@ -9,7 +9,8 @@ let redisClient: any;
 const connectRedis = () => {
   redisClient = redis.createClient({
     host: _.get(config, `redis.${env}.host`),
-    port: _.get(config, `redis.${env}.port`)
+    port: _.get(config, `redis.${env}.port`),
+    db: _.get(config, `redis.${env}.db`)
   });
 
   console.log('Redis connection established successfully');

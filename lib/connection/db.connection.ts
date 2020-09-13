@@ -2,7 +2,7 @@ import _ from 'lodash';
 import { Sequelize } from 'sequelize';
 import * as config from '../config/config.json';
 
-const env: string = _.get(config, 'service.env');
+const env: any = process.env.NODE_ENV;
 
 /**
  * Sequelize object constructed using the DB configs
@@ -13,7 +13,8 @@ const sequelize: Sequelize = new Sequelize(
   _.get(config, `database.${env}.password`),
   {
     host: _.get(config, `database.${env}.host`),
-    dialect: _.get(config, `database.${env}.dialect`)
+    dialect: _.get(config, `database.${env}.dialect`),
+    logging: (env === 'test' ? false : () => true)
   }
 );
 

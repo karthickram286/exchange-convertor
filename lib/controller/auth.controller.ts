@@ -23,14 +23,14 @@ class AuthController {
     // If the user is not present
     if (!user) {
       return res.status(404)
-        .json(`Invalid email or password`);
+        .json({ message: `Invalid email or password` });
     }
 
     // If the entered password didn't match
     let isValidPassword = await this._validatePassword(password, _.get(user, 'password'));
     if (!isValidPassword) {
       return res.status(404)
-        .json(`Invalid email or password`);
+        .json({ message: `Invalid email or password` });
     }
 
     let userId = _.get(user, 'id');
