@@ -22,10 +22,8 @@ class CountryController {
       let response;
       try {
         response = await axios.get(url);
-        console.log('found')
         return response.data;
       } catch (error) {
-        console.log('found---')
         console.log('No such country found');
         return null;
       }

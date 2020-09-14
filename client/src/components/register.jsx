@@ -47,7 +47,7 @@ class Register extends React.Component {
       });
     } catch (error) {
       this.setState({
-        status: `Registration failed: ${error.response.data}`
+        status: `Registration failed: ${error.response.data.message}`
       });
     }
   }

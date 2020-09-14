@@ -2,12 +2,21 @@
 
 An exchange convertor application which converts the value from base currency to multiple currencies.
 
+## Features
+- User Authentication and Authorization
+- Add countries (using https://restcountries.eu) and convert currencies (using https://fixer.io) to base currency
+- Rate limiting using redis
+- Caching the response of external API calls
+
 ## Requirements
 - Node.js `v12.16.1` or above
 - PostgreSQL `12.2` or above
 - Redis `v5.0.7` or above
 
-## Running the application
+## Configuration
+- Change the default configs to your needs by changing the `lib/config/config.json` file.
+
+## Running the application (with default configs)
 - clone the project locally
 - Run `npm install` in the main folder to install server side dependencies
 - `cd client` and then again run `npm install` to install client side dependencies

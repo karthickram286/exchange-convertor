@@ -61,7 +61,7 @@ class Login extends React.Component {
 
     } catch (error) {
       this.setState({
-        status: `Login failed: ${error.response.data}`
+        status: `Login failed: ${JSON.stringify(error.response.data.message)}`
       });
     }
   }
