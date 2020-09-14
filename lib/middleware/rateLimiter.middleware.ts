@@ -5,6 +5,14 @@ import { incrCount, getKey, setKeyWithTTL } from '../accessor/redis.accessor';
 import * as config from '../config/config.json';
 import { getJWTCacheKey } from '../util/cacheKey';
 
+/**
+ * Limits the number of requests made by the user based on his auth token
+ * If the user crossed his limits it will throw an error and the request won't pass through this middleware
+ * 
+ * @param req 
+ * @param res 
+ * @param next 
+ */
 const rateLimiter: RequestHandler = async (req, res, next) => {
 
   const token: any = req.header('x-auth-token');

@@ -17,6 +17,12 @@ class CountryController {
     let endpoint = _.get(config, 'service.country.endpoint');
     let url: string = `${base_url}${endpoint}${countryName}`;
 
+    /**
+     * Makes the third party call to get the county info and stores the value in cache
+     * 
+     * If the value is already present in the cache, it will be returned 
+     * and the third party call won't be made
+     */
     const cacheKey = getCountryCacheKey(countryName);
     let result = await getFromCache(cacheKey, async () => {
       let response;
@@ -31,6 +37,9 @@ class CountryController {
 
     const countriesArray: Array<object> = result;
 
+    /**
+     * Picking only the necessary fields
+     */
     let pickedCountries = pickCountryFields(countriesArray);
 
     return res.status(200)

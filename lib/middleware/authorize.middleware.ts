@@ -5,6 +5,15 @@ import UserAccessor from '../accessor/user.accessor';
 
 const jwtPrivatekey: any = process.env.JWT_PRIVATE_KEY;
 
+/**
+ * If the request comes from an authorized user, it will pass through this middleware.
+ * 
+ * If not and error will be thrown
+ * 
+ * @param req 
+ * @param res 
+ * @param next 
+ */
 const authorize: RequestHandler = async (req, res, next) => {
   const token = req.header('x-auth-token');
 

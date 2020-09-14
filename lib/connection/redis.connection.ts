@@ -3,14 +3,16 @@ import _ from 'lodash';
 
 import * as config from '../config/config.json';
 
-const env: string = _.get(config, 'service.env');
+const env: any = process.env.NODE_ENV;
 let redisClient: any;
 
+/**
+ * Establishes connection with Redis
+ */
 const connectRedis = () => {
   redisClient = redis.createClient({
     host: _.get(config, `redis.${env}.host`),
-    port: _.get(config, `redis.${env}.port`),
-    db: _.get(config, `redis.${env}.db`)
+    port: _.get(config, `redis.${env}.port`)
   });
 
   console.log('Redis connection established successfully');

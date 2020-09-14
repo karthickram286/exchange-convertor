@@ -22,6 +22,12 @@ class ConvertorController {
     let convertor_param = _.get(config, 'service.convertor.convertor_param');
     let url = `${base_url}${access_key_param}${access_key}${convertor_param}${currencies}`;
 
+    /**
+     * Makes the third party call to get the rates and stores the value in cache
+     * 
+     * If the value is already present in the cache, it will be returned 
+     * and the third party call won't be made
+     */
     const cacheKey = getConvertorCacheKey(currencies);
     let result = await getFromCache(cacheKey, async () => {
       let response = await axios.post(url);
@@ -32,6 +38,9 @@ class ConvertorController {
     let base_currency_rate = rates[base_currency];
     delete rates[base_currency];
 
+    /**
+     * Getting the conversion amounts
+     */
     let conversionAmount = getConversion(base_currency_rate, rates, amount);
 
     return res.status(200)
