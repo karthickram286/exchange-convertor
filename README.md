@@ -17,7 +17,7 @@ An exchange convertor application which converts the value from base currency to
 - Change the default configs to your needs by changing the `lib/config/config.json` file.
 
 ## Testing the endpoints
-You this postman collection to test the server endpoints
+Use this postman collection to test the server endpoints
 https://www.getpostman.com/collections/b02cbee204c78e2b6c36
 
 ## Running the application (with default configs)
