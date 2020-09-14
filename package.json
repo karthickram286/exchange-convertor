@@ -15,7 +15,8 @@
     "unit-test": "nyc --reporter=text node_modules/mocha/bin/_mocha build/tests/unit/**/*.js",
     "unit-test-report": "nyc --reporter=html node_modules/mocha/bin/_mocha build/tests/unit/**/*.js",
     "integ-test": "nyc --reporter=text node_modules/mocha/bin/_mocha build/tests/integ/**/*.js --timeout 1000 --exit",
-    "integ-test-report": "nyc --reporter=html node_modules/mocha/bin/_mocha build/tests/integ/**/*.js --timeout 1000 --exit"
+    "integ-test-report": "nyc --reporter=html node_modules/mocha/bin/_mocha build/tests/integ/**/*.js --timeout 1000 --exit",
+    "test": "npm run unit-test"
   },
   "repository": {
     "type": "git",
