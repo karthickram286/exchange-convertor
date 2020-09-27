@@ -13,38 +13,40 @@ describe ('Convertor APIs', () => {
     let password = 'password123';
     let authToken: any;
 
+    before(async () => {
+      it('should add user', async () => {
+        const res = await supertest(server)
+          .post('/v1/users/add')
+          .send({
+            username: username,
+            password: password
+          });
+  
+        expect(res.status).to.equal(200);
+        expect(res.body.username, 'testuser');
+      });
+  
+      it('should return authtoken on user login', async () => {
+  
+        const res = await supertest(server)
+          .post('/v1/auth/login')
+          .send({
+            username: username,
+            password: password
+          });
+  
+        expect(res.status).to.equal(200);
+        expect(res.body.authToken).to.not.empty;
+        expect(res.body.user_id).to.not.empty;
+  
+        authToken = res.body.authToken;
+      });
+    });
+
     after(async () => {
       await UserAccessor.deleteUserByName(username);
     });
-
-    it('should add user', async () => {
-      const res = await supertest(server)
-        .post('/v1/users/add')
-        .send({
-          username: username,
-          password: password
-        });
-
-      expect(res.status).to.equal(200);
-      expect(res.body.username, 'testuser');
-    });
-
-    it('should return authtoken on user login', async () => {
-
-      const res = await supertest(server)
-        .post('/v1/auth/login')
-        .send({
-          username: username,
-          password: password
-        });
-
-      expect(res.status).to.equal(200);
-      expect(res.body.authToken).to.not.empty;
-      expect(res.body.user_id).to.not.empty;
-
-      authToken = res.body.authToken;
-    });
-
+    
     it ('should convert currency rates', async () => {
 
       const res = await supertest(server)
