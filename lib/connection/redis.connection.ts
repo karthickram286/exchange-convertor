@@ -11,7 +11,7 @@ let redisClient: any;
  */
 const connectRedis = () => {
   redisClient = redis.createClient({
-    host: _.get(config, `redis.${env}.host`),
+    host: process.env.REDIS_HOST || _.get(config, `redis.${env}.host`),
     port: _.get(config, `redis.${env}.port`)
   });
 

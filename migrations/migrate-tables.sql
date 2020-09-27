@@ -1,5 +1,7 @@
+\connect exchange_converter
+
 -- Table Definition
-CREATE TABLE "public"."users" (
+CREATE TABLE IF NOT EXISTS "public"."users" (
     "id" uuid NOT NULL,
     "username" varchar NOT NULL,
     "password" varchar NOT NULL,
