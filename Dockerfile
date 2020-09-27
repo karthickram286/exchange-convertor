@@ -10,8 +10,10 @@ COPY . .
 
 RUN npm run build
 
+RUN npm run client-build
+
 ENV JWT_PRIVATE_KEY=anyfin
 
-EXPOSE 5000
+EXPOSE 5000 3000
 
-CMD [ "npm", "run", "server" ]
+CMD [ "npm", "run", "dev" ]
