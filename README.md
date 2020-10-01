@@ -40,6 +40,11 @@ https://www.getpostman.com/collections/b02cbee204c78e2b6c36
   9. `npm run integ-test` - To run the integration tests
   10. `npm run integ-test-report` - To run the integration tests and generate a html report
 
+## Don't want to follow these steps?
+You can pull the docker image from the hub and you can easily start the application in a container
+- `docker pull karthickram286/exchange-convertor:latest` to pull the image
+- `docker run karthickram286/exchange-convertor:latest` to run the image in a container
+
 **Note**: The client binds with server on port 5000(the port on which the server runs on dev mode). So, while running both the server and client in production mode(using `npm run prod`), change the port in `client/package.json` in `proxy` field to 7000.
 
 ## Issue reporting
