@@ -3,6 +3,7 @@ import axios from 'axios';
 import { Button, FormGroup, FormControl, FormLabel, Table } from 'react-bootstrap';
 import { withRouter } from 'react-router-dom';
 import Cookies from 'js-cookie';
+import Convertions from './convertions';
 
 import '../styles/exchange-convertor.styles.css';
 
@@ -150,11 +151,11 @@ class Convertor extends React.Component {
             </Button>
           </form> <br /> <br />
 
+          <Table responsive="lg" bordered hover>
           {
             this.state.countries.map(country => {
               return (
-                <Table responsive="lg" bordered hover>
-                  <tbody>
+                <tbody>
                   <tr key={country.name}>
                     <td>
                       <img 
@@ -175,11 +176,10 @@ class Convertor extends React.Component {
                         Add
                       </Button></td>
                   </tr>
-                  </tbody>
-                </Table>
+                </tbody>
               )
             })
-          } <br /> <br /> <br /> <br />
+          } </Table><br /> <br /> <br /> <br />
 
           <h5>Base Currency: SEK</h5> <br />
 
@@ -203,23 +203,7 @@ class Convertor extends React.Component {
             </Button>
           </form> <br /> <br />
 
-
-          {
-            this.state.currencies.map(currency => {
-              return (
-                <div>
-                  <Table responsive="lg" bordered hover>
-                    <tbody>
-                      <tr key={ currency }>
-                        <td>{ currency }</td>
-                        <td>{ this.state.convertion_rates[currency] }</td>
-                      </tr>
-                    </tbody>
-                  </Table>
-                </div>
-              )
-            })
-          }
+          <Convertions currencies={ this.state.currencies } convertion_rates={ this.state.convertion_rates }/>
 
         </div>
       </div>

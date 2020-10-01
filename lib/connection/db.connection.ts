@@ -12,7 +12,7 @@ const sequelize: Sequelize = new Sequelize(
   _.get(config, `database.${env}.username`),
   _.get(config, `database.${env}.password`),
   {
-    host: _.get(config, `database.${env}.host`),
+    host: process.env.DB_HOST || _.get(config, `database.${env}.host`),
     dialect: _.get(config, `database.${env}.dialect`),
     logging: (env === 'test' ? false : () => true)
   }
